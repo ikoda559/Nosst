@@ -1,58 +1,72 @@
 import { Link, useLocation } from 'react-router-dom';
-import { Search, PlusCircle, LogIn } from 'lucide-react';
-import { NosstLogo } from './NosstLogo';
+import { PlusCircle, Search, Home, LogIn } from 'lucide-react';
 
 export function Navbar() {
   const location = useLocation();
+  
   const isActive = (path: string) => location.pathname === path;
   
   return (
-    <div className="fixed top-4 left-1/2 transform -translate-x-1/2 z-50 pointer-events-none">
-      {/* Skinnier/Shorter Container */}
-      <div className="bg-gradient-to-r from-gray-200/80 via-slate-100/90 to-gray-200/80 backdrop-blur-2xl border border-gray-300/50 shadow-xl shadow-gray-300/30 p-0.5 pointer-events-auto max-w-md w-[80vw] sm:w-[450px] rounded-xl">
-        <div className="flex items-center px-1.5 py-1">
-          {/* Nosst Logo - LEFT */}
-          <div className="pl-2 pr-1.5 flex-shrink-0">
-            <Link to="/" className="flex items-center">
-              <NosstLogo className="text-base" />
-            </Link>
+    <nav className="bg-transparent absolute top-0 left-0 right-0 z-50">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex justify-between items-center h-20">
+          <Link to="/" className="flex items-center space-x-3 -ml-2">
+            <div className="w-10 h-10 bg-gradient-to-r from-blue-600 to-purple-600 rounded-lg"></div>
+            <span className="text-2xl font-bold text-gray-900">nosst</span>
+          </Link>
+          
+          {/* Centered Search Bar Style */}
+          <div className="absolute left-1/2 transform -translate-x-1/2 w-full max-w-2xl px-4">
+            <div className="bg-white/80 backdrop-blur-md border border-gray-200 rounded-full shadow-lg px-6 py-3 flex items-center space-x-3">
+              <Search className="w-5 h-5 text-gray-400" />
+              <input
+                type="text"
+                placeholder="Search projects..."
+                className="flex-1 bg-transparent border-none outline-none text-gray-900 placeholder-gray-400"
+              />
+            </div>
           </div>
           
-          {/* Navigation Buttons */}
-          <div className="flex-1 flex items-center justify-between px-1">
-            {/* Browse - CENTER */}
+          <div className="flex items-center space-x-6">
             <Link 
-              to="/browse" 
-              className={`flex items-center space-x-1 px-5 py-1.5 rounded-lg text-sm font-semibold transition-all duration-200 flex-grow text-center ${
-                isActive('/browse')
-                  ? 'bg-gradient-to-r from-emerald-500/15 to-emerald-600/15 text-emerald-800 backdrop-blur-sm shadow-sm hover:shadow-md'
-                  : 'text-gray-600 hover:text-gray-900 hover:bg-white/70 hover:shadow-sm'
+              to="/" 
+              className={`flex items-center space-x-2 px-4 py-2 rounded-lg transition-colors ${
+                isActive('/') 
+                  ? 'bg-blue-50 text-blue-600' 
+                  : 'text-gray-600 hover:bg-gray-50'
               }`}
             >
-              <Search className="w-3 h-3 mx-auto" />
+              <Home className="w-4 h-4" />
+              <span>Home</span>
+            </Link>
+            
+            <Link 
+              to="/browse" 
+              className={`flex items-center space-x-2 px-4 py-2 rounded-lg transition-colors ${
+                isActive('/browse') 
+                  ? 'bg-blue-50 text-blue-600' 
+                  : 'text-gray-600 hover:bg-gray-50'
+              }`}
+            >
+              <Search className="w-4 h-4" />
               <span>Browse Projects</span>
             </Link>
             
-            {/* Post + Login - RIGHT */}
-            <div className="flex items-center space-x-0.5">
-              {/* Post */}
-              <Link 
-                to="/create"
-                className="flex items-center space-x-1 px-3.5 py-1.5 bg-gradient-to-r from-blue-600 to-blue-700 text-white rounded-lg text-sm font-semibold shadow-md shadow-blue-400/25 hover:shadow-lg hover:shadow-blue-500/40 hover:from-blue-700 hover:to-blue-800 transition-all duration-200 flex-shrink-0"
-              >
-                <PlusCircle className="w-3 h-3" />
-                <span>Post</span>
-              </Link>
-              
-              {/* Login */}
-              <button className="flex items-center space-x-1 px-3 py-1.5 text-sm font-semibold text-slate-700 hover:text-slate-900 hover:bg-slate-100 rounded-lg shadow-sm hover:shadow-md transition-all duration-200 ml-0.5">
-                <LogIn className="w-3 h-3" />
-                <span>Login</span>
-              </button>
-            </div>
+            <Link 
+              to="/create" 
+              className="flex items-center space-x-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
+            >
+              <PlusCircle className="w-4 h-4" />
+              <span>Post Project</span>
+            </Link>
+            
+            <button className="flex items-center space-x-2 px-4 py-2 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors">
+              <LogIn className="w-4 h-4" />
+              <span>Login</span>
+            </button>
           </div>
         </div>
       </div>
-    </div>
+    </nav>
   );
 }

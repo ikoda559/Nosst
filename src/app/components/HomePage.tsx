@@ -5,31 +5,12 @@ export function HomePage() {
   return (
     <div className="min-h-screen">
       {/* Hero Section */}
-      <div className="bg-gradient-to-br from-blue-600 via-purple-600 to-pink-600 text-white">
+      <div className="bg-white min-h-screen flex items-center justify-center pt-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24">
-          <div className="text-center">
-            <h1 className="text-5xl sm:text-6xl mb-6 font-bold">
-              Turn Your App Ideas Into Reality
+          <div className="text-center animate-fadeIn">
+            <h1 className="text-7xl sm:text-8xl text-black font-bold">
+              Your Ideas Can Become Reality.
             </h1>
-            <p className="text-xl text-blue-100 mb-8 max-w-2xl mx-auto">
-              Connect with talented designers who can bring your application concepts to life. 
-              Post your idea, set your budget, and find the perfect match.
-            </p>
-            <div className="flex items-center justify-center space-x-4">
-              <Link 
-                to="/create" 
-                className="px-8 py-4 bg-white text-blue-600 rounded-lg hover:bg-blue-50 transition-colors flex items-center space-x-2 font-semibold"
-              >
-                <span>Post Your Project</span>
-                <ArrowRight className="w-5 h-5" />
-              </Link>
-              <Link 
-                to="/browse" 
-                className="px-8 py-4 bg-blue-700 text-white rounded-lg hover:bg-blue-800 transition-colors font-semibold"
-              >
-                Browse Projects 
-              </Link>
-            </div>
           </div>
         </div>
       </div>
@@ -81,7 +62,7 @@ export function HomePage() {
       <div className="bg-gradient-to-br from-gray-50 to-blue-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24">
           <div className="text-center mb-16">
-            <h2 className="text-4xl mb-4 text-gray-900 font-bold">Why nosst?</h2>
+            <h2 className="text-4xl mb-4 text-gray-900 font-bold">Why Choose nosst?</h2>
             <p className="text-xl text-gray-600">The platform built for modern app development</p>
           </div>
 
