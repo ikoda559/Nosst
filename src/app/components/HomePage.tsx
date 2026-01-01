@@ -5,10 +5,15 @@ export function HomePage() {
   return (
     <div className="min-h-screen">
       {/* Hero Section */}
-      <div className="bg-white min-h-screen flex items-center justify-center pt-20">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24">
+      <div className="bg-white min-h-screen flex items-center justify-center pt-0">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
           <div className="text-center animate-fadeIn">
-            <h1 className="text-7xl sm:text-8xl text-black font-bold">
+            <style>
+              {`
+                @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&display=swap');
+              `}
+            </style>
+            <h1 className="text-7xl xsm:text-8xl text-black font-normal" style={{ fontFamily: '"Playfair Display", Georgia, serif' }}>
               Your Ideas Can Become Reality.
             </h1>
           </div>
@@ -16,8 +21,8 @@ export function HomePage() {
       </div>
 
       {/* How It Works Section */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24">
-        <div className="text-center mb-16">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+        <div className="text-center mb-12">
           <h2 className="text-4xl mb-4 text-gray-900 font-bold">How It Works</h2>
           <p className="text-xl text-gray-600">Simple, fast, and secure project collaboration</p>
         </div>
@@ -60,8 +65,8 @@ export function HomePage() {
 
       {/* Why Choose Us Section */}
       <div className="bg-gradient-to-br from-gray-50 to-blue-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24">
-          <div className="text-center mb-16">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+          <div className="text-center mb-12">
             <h2 className="text-4xl mb-4 text-gray-900 font-bold">Why Choose nosst?</h2>
             <p className="text-xl text-gray-600">The platform built for modern app development</p>
           </div>
@@ -131,8 +136,8 @@ export function HomePage() {
       </div>
 
       {/* Testimonials Section */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24">
-        <div className="text-center mb-16">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+        <div className="text-center mb-12">
           <h2 className="text-4xl mb-4 text-gray-900 font-bold">What Our Users Say</h2>
           <p className="text-xl text-gray-600">Real feedback from real projects</p>
         </div>
@@ -181,7 +186,7 @@ export function HomePage() {
 
       {/* CTA Section */}
       <div className="bg-gradient-to-br from-gray-900 via-blue-900 to-purple-900 text-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
           <div className="text-center">
             <h2 className="text-4xl mb-4 font-bold">Ready to get started?</h2>
             <p className="text-gray-300 mb-8 text-lg">
