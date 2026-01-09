@@ -1,0 +1,25 @@
+<svg
+  width="420"
+  height="120"
+  viewBox="0 0 420 120"
+  xmlns="http://www.w3.org/2000/svg"
+>
+  <defs>
+    <linearGradient id="textGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#1f2b36"/>
+      <stop offset="100%" stop-color="#6f6f6f"/>
+    </linearGradient>
+  </defs>
+
+  <text
+    x="20"
+    y="85"
+    font-size="80"
+    font-family="Inter, Poppins, Montserrat, Arial, sans-serif"
+    font-weight="600"
+    letter-spacing="1"
+    fill="url(#textGradient)"
+  >
+    nosst
+  </text>
+</svg>
