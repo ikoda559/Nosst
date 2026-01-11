@@ -1,21 +1,148 @@
 import { Link } from 'react-router-dom';
-import { ArrowRight, Zap, Users, Shield, TrendingUp, Clock, Award } from 'lucide-react';
+import { ArrowRight, Zap, Users, Shield, TrendingUp, Clock, Award, Sparkles, Palette, Code, Layout, Smartphone, Globe } from 'lucide-react';
+import { useState, useEffect } from 'react';
 
 export function HomePage() {
+
+  // Track scroll position for icon animation
+  const [scrollY, setScrollY] = useState(0);
+  // Track which icon is currently displayed (for rotation effect)
+  const [currentIconIndex, setCurrentIconIndex] = useState(0);
+
+  // Calculate scroll progress from 0 to 1 (complete at 400px scroll)
+  const scrollProgress = Math.min(scrollY / 400, 1);
+
+  // Defines the icons that will float and spread in a circle
+  const floatingIcons = [
+    { Icon: Palette, color: 'text-pink-500' },
+    { Icon: Code, color: 'text-blue-500' },
+    { Icon: Layout, color: 'text-purple-500' },
+    { Icon: Smartphone, color: 'text-green-500' },
+    { Icon: Globe, color: 'text-yellow-500' },
+    { Icon: Sparkles, color: 'text-indigo-500' },
+  ];
+
+  // Listen to scroll events and update scrollY state
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrollY(window.scrollY);
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    // Cleanup: remove event listener when component unmounts
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  // Rotate through icons every 1600ms when centered
+  useEffect(() => {
+    if (scrollProgress < 0.1) {
+      const interval = setInterval(() => {
+        setCurrentIconIndex((prev) => (prev + 1) % floatingIcons.length);
+      }, 1850); // Icon change speed
+      
+      return () => clearInterval(interval);
+    }
+  }, [scrollProgress, floatingIcons.length]);
+
+  // Calculate each icon's position in a circular formation
+  const getIconPosition = (index, total) => {
+    // Calculate angle for even distribution around circle (starts from top)
+    const angle = (index / total) * 2 * Math.PI - Math.PI / 2;
+    // Radius grows from 0 to 135px based on scroll progress
+    const radius = 135 * scrollProgress;
+    // Calculate x and y coordinates using trigonometry
+    const x = Math.cos(angle) * radius;
+    const y = Math.sin(angle) * radius;
+    // Icons scale from 0.5 to 1 as they spread
+    const scale = 0.5 + (scrollProgress * 0.5);
+    // Icons become more opaque as they spread (0.3 to 1)
+    const opacity = 0.4 + (scrollProgress * 0.6);
+
+    return {
+      transform: `translate(${x}px, ${y}px) scale(${scale})`,
+      opacity,
+    };
+  };
+
   return (
     <div className="min-h-screen">
-      {/* Hero Section */}
-      <div className="bg-white min-h-screen flex items-center justify-center pt-0">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+      {/* Hero Section - Full screen with floating icons */}
+      <div className="bg-white min-h-screen flex items-start justify-center pt-27 relative overflow-hidden">
+        
+        {/* Floating Icons Container - positioned at top with pt-148 */}
+        <div className="absolute inset-0 flex items-start justify-center pointer-events-none pt-148">
+          <div className="relative">
+
+            {floatingIcons.map((item, index) => {
+  const { Icon, color } = item;
+  const position = getIconPosition(index, floatingIcons.length);
+  // Check if icons are still centered (before spreading)
+  const isCenter = scrollProgress < 0.1;
+  
+  // When centered, only show the current rotating icon
+  const showThisIcon = !isCenter || index === currentIconIndex;
+  
+  if (!showThisIcon) return null;
+  
+  return (
+    <div
+      key={index}
+      className="absolute"
+      style={{
+        ...position,
+        transition: 'all 0.3s ease-out', // Smooth animation
+      }}
+    >
+      {/* Icon container - larger with shiny gradient when centered */}
+      <div className={`
+        ${isCenter ? 'w-26 h-26' : 'w-16 h-16'} 
+        ${isCenter ? 'bg-gradient-to-br from-gray-400 via-white to-gray-200' : 'bg-white'}
+        rounded-2xl 
+        shadow-lg
+        flex items-center justify-center 
+        ${color} 
+        border border-gray-100
+        ${isCenter ? 'animate-pulse' : ''}
+      `}>
+        {/* Icon itself - larger when centered */}
+        <Icon className={`${isCenter ? 'w-15 h-15' : 'w-8 h-8'}`} strokeWidth={1.5} />
+      </div>
+    </div>
+  );
+})}
+          </div>
+        </div>
+
+        {/* Main heading and tagline */}
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-2 relative z-10">
           <div className="text-center animate-fadeIn">
+            {/* Custom styles for Playfair Display font and fade-in animation */}
             <style>
               {`
                 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&display=swap');
+                @keyframes fadeIn {
+                  from {
+                    opacity: 0;
+                    transform: translateY(20px);
+                  }
+                  to {
+                    opacity: 1;
+                    transform: translateY(0);
+                  }
+                }
+                .animate-fadeIn {
+                  animation: fadeIn 1s ease-out;
+                }
               `}
             </style>
-            <h1 className="text-7xl xsm:text-8xl text-black font-normal" style={{ fontFamily: '"Playfair Display", Georgia, serif' }}>
+            {/* Main headline with custom serif font */}
+            <h1 className="text-7xl sm:text-8xl text-black font-normal" style={{ fontFamily: '"Playfair Display", Georgia, serif' }}>
               Your Ideas Can Become Reality.
             </h1>
+            {/* Tagline - gray, larger text, spaced below headline */}
+            <p className="text-xl text-gray-600 mt-16">
+              Simply post what application you want created, then a developer will take it from there..
+            </p>
           </div>
         </div>
       </div>
@@ -27,7 +154,9 @@ export function HomePage() {
           <p className="text-xl text-gray-600">Simple, fast, and secure project collaboration</p>
         </div>
 
+        {/* 3-column grid on medium+ screens */}
         <div className="grid md:grid-cols-3 gap-8">
+
           <div className="bg-white p-8 rounded-xl shadow-sm border border-gray-200 hover:shadow-md transition-shadow">
             <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mb-4">
               <Zap className="w-6 h-6 text-blue-600" />
@@ -63,7 +192,7 @@ export function HomePage() {
         </div>
       </div>
 
-      {/* Why Choose Us Section */}
+      {/* Why Choose Us Section*/}
       <div className="bg-gradient-to-br from-gray-50 to-blue-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
           <div className="text-center mb-12">
@@ -71,7 +200,9 @@ export function HomePage() {
             <p className="text-xl text-gray-600">The platform built for modern app development</p>
           </div>
 
+          {/* Responsive grid: 1 col mobile, 2 cols tablet, 3 cols desktop */}
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+
             <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-200">
               <div className="w-10 h-10 bg-blue-100 rounded-lg flex items-center justify-center mb-4">
                 <TrendingUp className="w-5 h-5 text-blue-600" />
@@ -135,14 +266,15 @@ export function HomePage() {
         </div>
       </div>
 
-      {/* Testimonials Section */}
+      {/* Section - 3 Fake reviews */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
         <div className="text-center mb-12">
           <h2 className="text-4xl mb-4 text-gray-900 font-bold">What Our Users Say</h2>
           <p className="text-xl text-gray-600">Real feedback from real projects</p>
         </div>
 
-        <div className="grid md:grid-cols-3 gap-8">
+        {/* 3-column grid on medium+ screens */}
+        <div className="grid md:grid-cols-3 gap-8">  
           <div className="bg-white p-8 rounded-xl shadow-sm border border-gray-200">
             <div className="flex items-center mb-4">
               <div className="w-12 h-12 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full"></div>
@@ -184,7 +316,7 @@ export function HomePage() {
         </div>
       </div>
 
-      {/* CTA Section */}
+      {/* CTA Section - Call to action with dark gradient background */}
       <div className="bg-gradient-to-br from-gray-900 via-blue-900 to-purple-900 text-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
           <div className="text-center">
@@ -192,6 +324,7 @@ export function HomePage() {
             <p className="text-gray-300 mb-8 text-lg">
               Join hundreds of clients and designers already using nosst
             </p>
+            {/* Primary CTA button linking to project creation */}
             <Link 
               to="/create" 
               className="inline-flex items-center px-8 py-4 bg-white text-blue-600 rounded-lg hover:bg-blue-50 transition-colors space-x-2 font-semibold"

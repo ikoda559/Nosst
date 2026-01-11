@@ -8,7 +8,7 @@ export function Navbar() {
   const isActive = (path: string) => location.pathname === path;
   
   return (
-    <nav className="bg-transparent absolute top-0 left-0 right-0 z-50">
+    <nav className="bg-white top-0 left-0 right-0 z-50 border-b border-gray-200">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-20">
           <Link to="/" className="flex items-center space-x-3 -ml-25">
@@ -20,7 +20,7 @@ export function Navbar() {
           </Link>
         
           <div className="absolute left-[30%] transform -translate-x-1/4 w-full max-w-xl px-4">
-          <div className="bg-white/80 backdrop-blur-md border border-gray-200 rounded-full shadow-lg px-6 py-3 flex items-center space-x-3">
+          <div className="bg-white/80 backdrop-blur-md border border-gray-200 rounded-full shadow- px-6 py-3 flex items-center space-x-3">
           <Search className="w-5 h-5 text-gray-400" />
           <input
                 type="text"

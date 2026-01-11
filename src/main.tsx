@@ -4,4 +4,4 @@
   import "./styles/index.css";
 
   //Creates a root and says take the App from App.tsx and render it in the index.html root
-  createRoot(document.getElementById("root")!).render(<App />); 
+  createRoot(document.getElementById("root")!).render(<App />);

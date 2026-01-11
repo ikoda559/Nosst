@@ -6,8 +6,9 @@
 >
   <defs>
     <linearGradient id="textGradient" x1="0%" y1="0%" x2="100%" y2="0%">
-      <stop offset="0%" stop-color="#1f2b36"/>
-      <stop offset="100%" stop-color="#6f6f6f"/>
+      <stop offset="0%" stop-color="#162f45"/>
+      <stop offset="45%" stop-color="#1f405c"/>
+      <stop offset="100%" stop-color="#6a6a6a"/>
     </linearGradient>
   </defs>
 
@@ -15,9 +16,9 @@
     x="20"
     y="85"
     font-size="80"
-    font-family="Inter, Poppins, Montserrat, Arial, sans-serif"
+    font-family="Lora, Merriweather, Georgia, serif"
     font-weight="600"
-    letter-spacing="1"
+    letter-spacing="-1.5"
     fill="url(#textGradient)"
   >
     nosst
