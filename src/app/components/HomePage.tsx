@@ -3,7 +3,6 @@ import { ArrowRight, Zap, Users, Shield, TrendingUp, Clock, Award, Sparkles, Pal
 import { useState, useEffect } from 'react';
 
 export function HomePage() {
-
   // Track scroll position for icon animation
   const [scrollY, setScrollY] = useState(0);
   // Track which icon is currently displayed (for rotation effect)
@@ -67,49 +66,47 @@ export function HomePage() {
   return (
     <div className="min-h-screen">
       {/* Hero Section - Full screen with floating icons */}
-      <div className="bg-white min-h-screen flex items-start justify-center pt-27 relative overflow-hidden">
-        
+      <div className="bg-white min-h-screen flex items-start justify-center pt-32 relative overflow-hidden">
         {/* Floating Icons Container - positioned at top with pt-148 */}
-        <div className="absolute inset-0 flex items-start justify-center pointer-events-none pt-148">
-          <div className="relative">
-
+        <div className="absolute inset-0 flex items-start justify-center pointer-events-none pt-96">
+          <div className="relative" style={{ transform: 'translateY(200px)' }}>
             {floatingIcons.map((item, index) => {
-  const { Icon, color } = item;
-  const position = getIconPosition(index, floatingIcons.length);
-  // Check if icons are still centered (before spreading)
-  const isCenter = scrollProgress < 0.1;
-  
-  // When centered, only show the current rotating icon
-  const showThisIcon = !isCenter || index === currentIconIndex;
-  
-  if (!showThisIcon) return null;
-  
-  return (
-    <div
-      key={index}
-      className="absolute"
-      style={{
-        ...position,
-        transition: 'all 0.3s ease-out', // Smooth animation
-      }}
-    >
-      {/* Icon container - larger with shiny gradient when centered */}
-      <div className={`
-        ${isCenter ? 'w-26 h-26' : 'w-16 h-16'} 
-        ${isCenter ? 'bg-gradient-to-br from-gray-400 via-white to-gray-200' : 'bg-white'}
-        rounded-2xl 
-        shadow-lg
-        flex items-center justify-center 
-        ${color} 
-        border border-gray-100
-        ${isCenter ? 'animate-pulse' : ''}
-      `}>
-        {/* Icon itself - larger when centered */}
-        <Icon className={`${isCenter ? 'w-15 h-15' : 'w-8 h-8'}`} strokeWidth={1.5} />
-      </div>
-    </div>
-  );
-})}
+              const { Icon, color } = item;
+              const position = getIconPosition(index, floatingIcons.length);
+              // Check if icons are still centered (before spreading)
+              const isCenter = scrollProgress < 0.1;
+              
+              // When centered, only show the current rotating icon
+              const showThisIcon = !isCenter || index === currentIconIndex;
+              
+              if (!showThisIcon) return null;
+              
+              return (
+                <div
+                  key={index}
+                  className="absolute"
+                  style={{
+                    ...position,
+                    transition: 'all 0.3s ease-out', // Animation of the icons fading in and out
+                  }}
+                >
+                  {/* Icon container - larger with shiny gradient when centered */}
+                  <div className={`
+                    ${isCenter ? 'w-24 h-24' : 'w-16 h-16'} 
+                    ${isCenter ? 'bg-gradient-to-br from-gray-400 via-white to-gray-200' : 'bg-white'}
+                    rounded-2xl 
+                    shadow-lg
+                    flex items-center justify-center 
+                    ${color} 
+                    border border-gray-100
+                    ${isCenter ? 'animate-pulse' : ''}
+                  `}>
+                    {/* Icon itself - larger when centered */}
+                    <Icon className={`${isCenter ? 'w-14 h-14' : 'w-8 h-8'}`} strokeWidth={1.5} />
+                  </div>
+                </div>
+              );
+            })}
           </div>
         </div>
 
@@ -156,7 +153,6 @@ export function HomePage() {
 
         {/* 3-column grid on medium+ screens */}
         <div className="grid md:grid-cols-3 gap-8">
-
           <div className="bg-white p-8 rounded-xl shadow-sm border border-gray-200 hover:shadow-md transition-shadow">
             <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mb-4">
               <Zap className="w-6 h-6 text-blue-600" />
@@ -202,7 +198,6 @@ export function HomePage() {
 
           {/* Responsive grid: 1 col mobile, 2 cols tablet, 3 cols desktop */}
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-
             <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-200">
               <div className="w-10 h-10 bg-blue-100 rounded-lg flex items-center justify-center mb-4">
                 <TrendingUp className="w-5 h-5 text-blue-600" />
@@ -274,7 +269,7 @@ export function HomePage() {
         </div>
 
         {/* 3-column grid on medium+ screens */}
-        <div className="grid md:grid-cols-3 gap-8">  
+        <div className="grid md:grid-cols-3 gap-8">
           <div className="bg-white p-8 rounded-xl shadow-sm border border-gray-200">
             <div className="flex items-center mb-4">
               <div className="w-12 h-12 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full"></div>
