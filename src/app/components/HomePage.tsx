@@ -44,7 +44,7 @@ export function HomePage() {
   }, [scrollProgress, floatingIcons.length]);
 
   // Calculate each icon's position in a circular formation
-  const getIconPosition = (index, total) => {
+  const getIconPosition = (index: number, total: number) => {
     // Calculate angle for even distribution around circle (starts from top)
     const angle = (index / total) * 2 * Math.PI - Math.PI / 2;
     // Radius grows from 0 to 135px based on scroll progress

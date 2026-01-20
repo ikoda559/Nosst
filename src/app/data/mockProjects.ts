@@ -9,7 +9,7 @@ export const mockProjects: Project[] = [
     timeline: '4-6 weeks',
     priceRange: { min: 3000, max: 5000 },
     status: 'open',
-    createdAt: '2024-12-20T10:00:00Z',
+    createdAt: '2026-01-19T10:00:00Z',
     category: 'Mobile App',
     tags: ['Fitness', 'Health', 'Social', 'Mobile']
   },
@@ -22,7 +22,7 @@ export const mockProjects: Project[] = [
     priceRange: { min: 2500, max: 4000 },
     status: 'open',
     createdAt: '2024-12-19T14:30:00Z',
-    category: 'Web App',
+    category: 'Website',
     tags: ['Dashboard', 'E-commerce', 'Analytics', 'Admin']
   },
   {
@@ -34,7 +34,7 @@ export const mockProjects: Project[] = [
     priceRange: { min: 5000, max: 8000 },
     status: 'open',
     createdAt: '2024-12-18T09:15:00Z',
-    category: 'Web & Mobile',
+    category: 'Website',
     tags: ['Social', 'Food', 'Community', 'Mobile', 'Web']
   },
   {
@@ -46,7 +46,7 @@ export const mockProjects: Project[] = [
     priceRange: { min: 4000, max: 6000 },
     status: 'open',
     createdAt: '2024-12-17T16:45:00Z',
-    category: 'Web App',
+    category: 'Desktop App',
     tags: ['AI', 'Productivity', 'Writing', 'SaaS']
   },
   {
@@ -70,7 +70,7 @@ export const mockProjects: Project[] = [
     priceRange: { min: 6000, max: 9000 },
     status: 'open',
     createdAt: '2024-12-15T13:00:00Z',
-    category: 'Web App',
+    category: 'Desktop App',
     tags: ['Productivity', 'Collaboration', 'Teams', 'SaaS']
   }
 ];
