@@ -1,7 +1,7 @@
 
   # Freelance Design Marketplace
 
-  This is a code bundle for Freelance Design Marketplace. The original project is available at https://www.figma.com/design/v0NyR7cOJJqs5OrDkcsIew/Freelance-Design-Marketplace.
+  This is a niche for a marketplace that offers simplsitity of wanting an idea come to life and getting it done.
 
   ## Running the code
 
