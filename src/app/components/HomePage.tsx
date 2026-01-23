@@ -63,13 +63,10 @@ export function HomePage() {
     };
   };
 
-  // Interpolate color from white to dark slate-800 based on scroll
+  // Interpolate color from pure black to pure white based on scroll
   const getHeadingColor = () => {
-    // RGB values: white (255,255,255) to slate-900 (15,23,42)
-    const r = Math.round(255 - (255 - 15) * scrollProgress);
-    const g = Math.round(255 - (255 - 23) * scrollProgress);
-    const b = Math.round(255 - (255 - 42) * scrollProgress);
-    return `rgb(${r}, ${g}, ${b})`;
+    const v = Math.round(255 * scrollProgress);
+    return `rgb(${v}, ${v}, ${v})`;
   };
 
   // Interpolate tagline color from light gray to pure white as user scrolls
@@ -84,7 +81,7 @@ export function HomePage() {
   return (
     <div className="min-h-screen">
       {/* Hero Section - Full screen with floating icons */}
-      <div className="bg-gradient-to-b from-slate-800 to-white min-h-screen flex items-start justify-center pt-32 relative overflow-hidden">
+      <div className="bg-gradient-to-b from-white to-slate-800 min-h-screen flex items-start justify-center pt-32 relative overflow-hidden">
         {/* Main heading and tagline */}
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-2 relative z-10">
           <div className="text-center animate-fadeIn">
@@ -119,39 +116,48 @@ export function HomePage() {
             </h1>
             {/* Tagline - gray, larger text, spaced below headline */}
             <p className="text-xl text-white mt-16">
-              Simply post what application you want created, then a developer will take it from there..
+              Simply post what application you want created, then a developer will take it from there...
             </p>
 
             {/* Floating Icons Container - positioned below text */}
-            <div className="relative flex items-center justify-center pointer-events-none h-64 mt-16">
+            <div className="relative flex items-center justify-center pointer-events-none h-64 mt-28">
               {floatingIcons.map((item, index) => {
                 const { Icon, color } = item;
                 const position = getIconPosition(index, floatingIcons.length);
                 const isCenter = scrollProgress < 0.1;
-                const showThisIcon = !isCenter || index === currentIconIndex;
-
-                if (!showThisIcon) return null;
+                const isCenterIcon = index === currentIconIndex;
+                
+                // For center state: only show the current rotating icon
+                // For spread state: show all icons
+                const shouldRender = !isCenter || isCenterIcon;
+                
+                // Fade out non-center icons when returning to center
+                const iconOpacity = isCenter && !isCenterIcon ? 0 : position.opacity;
 
                 return (
                   <div
                     key={index}
                     className="absolute"
                     style={{
-                      ...position,
-                      transition: 'all 0.3s ease-out',
+                      transform: position.transform,
+                      opacity: shouldRender ? iconOpacity : 0,
+                      transition: isCenter 
+                        ? 'opacity 0.3s ease-out' // Only transition opacity when centering
+                        : 'all 0.3s ease-out', // Transition everything when spreading
+                      pointerEvents: 'none',
                     }}
                   >
                     <div className={`
-                      ${isCenter ? 'w-42 h-42' : 'w-16 h-16'} 
+                      ${isCenter ? 'w-42 h-42' : 'w-14 h-14'} 
                       ${isCenter ? 'bg-gradient-to-br from-gray-400 via-white to-gray-200' : 'bg-white'}
                       rounded-2xl 
                       shadow-lg
                       flex items-center justify-center 
                       ${color} 
                       border border-gray-100
-                      ${isCenter ? 'animate-pulse' : ''}
+                      ${isCenter && isCenterIcon ? 'animate-pulse' : ''}
                     `}>
-                      <Icon className={`${isCenter ? 'w-14 h-14' : 'w-8 h-8'}`} strokeWidth={1.5} />
+                      <Icon className={`${isCenter ? 'w-24 h-24' : 'w-9 h-9'}`} strokeWidth={1.1} />
                     </div>
                   </div>
                 );
