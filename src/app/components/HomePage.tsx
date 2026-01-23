@@ -63,53 +63,28 @@ export function HomePage() {
     };
   };
 
+  // Interpolate color from white to dark slate-800 based on scroll
+  const getHeadingColor = () => {
+    // RGB values: white (255,255,255) to slate-900 (15,23,42)
+    const r = Math.round(255 - (255 - 15) * scrollProgress);
+    const g = Math.round(255 - (255 - 23) * scrollProgress);
+    const b = Math.round(255 - (255 - 42) * scrollProgress);
+    return `rgb(${r}, ${g}, ${b})`;
+  };
+
+  // Interpolate tagline color from light gray to pure white as user scrolls
+  const getTaglineColor = () => {
+    // RGB values: gray-200 (229,231,235) to white (255,255,255)
+    const r = Math.round(229 + (255 - 229) * scrollProgress);
+    const g = Math.round(231 + (255 - 231) * scrollProgress);
+    const b = Math.round(235 + (255 - 235) * scrollProgress);
+    return `rgb(${r}, ${g}, ${b})`;
+  };
+
   return (
     <div className="min-h-screen">
       {/* Hero Section - Full screen with floating icons */}
-      <div className="bg-white min-h-screen flex items-start justify-center pt-32 relative overflow-hidden">
-        {/* Floating Icons Container - positioned at top with pt-148 */}
-        <div className="absolute inset-0 flex items-start justify-center pointer-events-none pt-96">
-          <div className="relative" style={{ transform: 'translateY(200px)' }}>
-            {floatingIcons.map((item, index) => {
-              const { Icon, color } = item;
-              const position = getIconPosition(index, floatingIcons.length);
-              // Check if icons are still centered (before spreading)
-              const isCenter = scrollProgress < 0.1;
-              
-              // When centered, only show the current rotating icon
-              const showThisIcon = !isCenter || index === currentIconIndex;
-              
-              if (!showThisIcon) return null;
-              
-              return (
-                <div
-                  key={index}
-                  className="absolute"
-                  style={{
-                    ...position,
-                    transition: 'all 0.3s ease-out', // Animation of the icons fading in and out
-                  }}
-                >
-                  {/* Icon container - larger with shiny gradient when centered */}
-                  <div className={`
-                    ${isCenter ? 'w-24 h-24' : 'w-16 h-16'} 
-                    ${isCenter ? 'bg-gradient-to-br from-gray-400 via-white to-gray-200' : 'bg-white'}
-                    rounded-2xl 
-                    shadow-lg
-                    flex items-center justify-center 
-                    ${color} 
-                    border border-gray-100
-                    ${isCenter ? 'animate-pulse' : ''}
-                  `}>
-                    {/* Icon itself - larger when centered */}
-                    <Icon className={`${isCenter ? 'w-14 h-14' : 'w-8 h-8'}`} strokeWidth={1.5} />
-                  </div>
-                </div>
-              );
-            })}
-          </div>
-        </div>
-
+      <div className="bg-gradient-to-b from-slate-800 to-white min-h-screen flex items-start justify-center pt-32 relative overflow-hidden">
         {/* Main heading and tagline */}
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-2 relative z-10">
           <div className="text-center animate-fadeIn">
@@ -133,13 +108,55 @@ export function HomePage() {
               `}
             </style>
             {/* Main headline with custom serif font */}
-            <h1 className="text-7xl sm:text-8xl text-black font-normal" style={{ fontFamily: '"Playfair Display", Georgia, serif' }}>
+            <h1 
+              className="text-7xl sm:text-8xl font-normal"
+              style={{ 
+                fontFamily: '"Playfair Display", Georgia, serif',
+                color: getHeadingColor()
+              }}
+            >
               Your Ideas Can Become Reality.
             </h1>
             {/* Tagline - gray, larger text, spaced below headline */}
-            <p className="text-xl text-gray-600 mt-16">
+            <p className="text-xl text-white mt-16">
               Simply post what application you want created, then a developer will take it from there..
             </p>
+
+            {/* Floating Icons Container - positioned below text */}
+            <div className="relative flex items-center justify-center pointer-events-none h-64 mt-16">
+              {floatingIcons.map((item, index) => {
+                const { Icon, color } = item;
+                const position = getIconPosition(index, floatingIcons.length);
+                const isCenter = scrollProgress < 0.1;
+                const showThisIcon = !isCenter || index === currentIconIndex;
+
+                if (!showThisIcon) return null;
+
+                return (
+                  <div
+                    key={index}
+                    className="absolute"
+                    style={{
+                      ...position,
+                      transition: 'all 0.3s ease-out',
+                    }}
+                  >
+                    <div className={`
+                      ${isCenter ? 'w-42 h-42' : 'w-16 h-16'} 
+                      ${isCenter ? 'bg-gradient-to-br from-gray-400 via-white to-gray-200' : 'bg-white'}
+                      rounded-2xl 
+                      shadow-lg
+                      flex items-center justify-center 
+                      ${color} 
+                      border border-gray-100
+                      ${isCenter ? 'animate-pulse' : ''}
+                    `}>
+                      <Icon className={`${isCenter ? 'w-14 h-14' : 'w-8 h-8'}`} strokeWidth={1.5} />
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
           </div>
         </div>
       </div>
