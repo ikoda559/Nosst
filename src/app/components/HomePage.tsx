@@ -109,7 +109,7 @@ export function HomePage() {
               className="text-7xl sm:text-8xl font-normal"
               style={{ 
                 fontFamily: '"Playfair Display", Georgia, serif',
-                color: getHeadingColor()
+                color: '#1e293b'
               }}
             >
               Your Ideas Can Become Reality.
