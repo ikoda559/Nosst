@@ -40,13 +40,7 @@ export function Navbar() {
 
           <div className="flex-1 min-w-0">
             <form onSubmit={handleSearch} className="w-full">
-              <div className="w-full max-w-none bg-white/80 backdrop-blur-md border border-gray-200 rounded-full px-0 py-0 flex items-center">
-                <div className="flex items-center space-x-3 bg-slate-800 rounded-l-full px-4 py-3">
-                  <Search 
-                    className="w-5 h-5 text-white cursor-pointer hover:text-gray-200 transition-colors" 
-                    onClick={handleSearch}
-                  />
-                </div>
+              <div className="w-full max-w-none bg-white/80 backdrop-blur-md border-[0.5px] border-gray-200 rounded-full px-0 py-0 flex items-center">
                 <input
                   type="text"
                   placeholder="Search projects..."
@@ -55,6 +49,12 @@ export function Navbar() {
                   onKeyPress={handleKeyPress}
                   className="flex-1 bg-transparent border-none outline-none text-gray-900 placeholder-gray-400 px-6"
                 />
+                <div className="flex items-center space-x-3 bg-slate-800 rounded-r-full px-4 py-3">
+                  <Search 
+                    className="w-5 h-5 text-white cursor-pointer hover:text-gray-200 transition-colors" 
+                    onClick={handleSearch}
+                  />
+                </div>
               </div>
             </form>
           </div>
